@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.apache.maven.wagon.authentication.AuthenticationInfo;
 
+import com.amazonaws.auth.EC2ContainerCredentialsProviderWrapper;
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.AWSCredentialsProviderChain;
 import com.amazonaws.auth.EnvironmentVariableCredentialsProvider;
@@ -47,6 +48,9 @@ public final class MavenAwsCredentialsProviderChain extends AWSCredentialsProvid
 
 		// Then fall through to settings.xml
 		providers.add(new AuthenticationInfoCredentialsProvider(auth));
+
+		// Then fall through to Amazon's ECS Instance Metadata Service
+		providers.add(new EC2ContainerCredentialsProviderWrapper());
 
 		// Then fall through to Amazon's EC2 Instance Metadata Service
 		// http://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/java-dg-roles.html

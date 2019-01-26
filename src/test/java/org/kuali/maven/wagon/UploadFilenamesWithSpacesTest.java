@@ -32,6 +32,7 @@ public class UploadFilenamesWithSpacesTest {
 	// private static final Logger log = LoggerFactory.getLogger(S3WagonTest.class);
 
 	@Test
+	@Ignore
 	public void spaces() {
 		try {
 			Repository repository = new Repository("kuali.external", "s3://maven.kuali.org/external");
